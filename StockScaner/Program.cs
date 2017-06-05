@@ -25,7 +25,7 @@ namespace StockScaner
                 } while (scannerName.ToUpper()!="QL"&&scannerName.ToUpper()!="YH");
 
                 IStock stock = null;
-                switch (scannerName)
+                switch (scannerName.ToUpper())
                 {
                     case "QL": 
                           stock = new QLExcelStockReader().Read();
@@ -65,16 +65,35 @@ namespace StockScaner
                 CustomerAttributes.SMALineType longPeriod = ConvertToSMA(longP);
 
                 CustomerAttributes.SMALineType bottomPeriod = ConvertToSMA(periodArray[Array.IndexOf(periodArray, longP) + 1]);
-                var res = stock.Scan(shortPeriod, longPeriod,bottomPeriod);
+
+                DefaultAnalyzer da = new DefaultAnalyzer(new AnalyzerMethod()
+                {
+
+                    ShortPeriod = shortPeriod,
+                    LongPeriod = longPeriod,
+                    BottomPeriod = bottomPeriod
+                });
+                da.Run(stock);
+
+               // var res = stock.Scan(shortPeriod, longPeriod,bottomPeriod);
                 Console.WriteLine("-----------------REPORT-------------------");
                 Console.WriteLine(string.Format("stock symbol:{0}", stock.info.Symbol));
                 //Console.WriteLine(string.Format("scan type:{0}__{1}"), ((int)CustomerAttributes.SMALineType.line20).ToString(), ((int)CustomerAttributes.SMALineType.line30).ToString());
 
-                foreach (var data in res)
+                //foreach (var data in res)
+                //{
+                //    Console.WriteLine("-----------------------------------");
+                //    Console.WriteLine(string.Format("date:{0}", data.Date));
+                //    Console.WriteLine("-----------------------------------");
+                //}
+                foreach (var item in da.Results)
                 {
                     Console.WriteLine("-----------------------------------");
-                    Console.WriteLine(string.Format("date:{0}", data.Date));
+                    Console.WriteLine(string.Format("start date : {0},     end date : {1}",item.StartDate,item.EndDate));
+                    Console.WriteLine(string.Format("start price : {0},      end price:{1}", item.StartPrice,item.EndPrice));
+                    Console.WriteLine(string.Format("Profit: {0}%",item.Profit));
                     Console.WriteLine("-----------------------------------");
+                    
                 }
                 
             } while (true);        

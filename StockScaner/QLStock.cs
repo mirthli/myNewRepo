@@ -13,8 +13,10 @@ namespace StockScaner
         public List<Data> WeeklyDatas { get; set; }
 
         //public int[] periodArray=new int[]{5,10,20,30,60,120,240,360};
-       
+     
 
+        //public Data PredictedBuyPoint { get; set; }
+        //public Data PredictedSellPoint { get; set; }
         public List<Data> Scan(SMALineType shortPeriod, SMALineType longPeriod,SMALineType bottomPeriod)
         {
             Data[] datas = WeeklyDatas.ToArray();
@@ -92,7 +94,7 @@ namespace StockScaner
             }
             return datas;
         }
-
+       
         
     }
     public class Info

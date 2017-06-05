@@ -10,6 +10,8 @@ namespace StockScaner
    public interface IStock
     {
        Info info { get; set; }
+
+       List<Data> WeeklyDatas { get; set; }
        List<Data> Scan(SMALineType shortPeriod, SMALineType longPeriod, SMALineType bottomPeriod);        
     }
 }

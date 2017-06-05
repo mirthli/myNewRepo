@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerAttributes\SMAAttribute.cs" />
+    <Compile Include="DefaultAnalyzer.cs" />
     <Compile Include="ExcelHelper.cs" />
     <Compile Include="IStock.cs" />
     <Compile Include="IStockReader.cs" />
