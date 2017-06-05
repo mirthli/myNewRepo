@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4B27F470-5048-49CC-9576-E2301323CA0D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StockScaner</RootNamespace>
+    <AssemblyName>StockScaner</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.2.16.3.0\lib\net45\CsvHelper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OOXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomerAttributes\SMAAttribute.cs" />
+    <Compile Include="ExcelHelper.cs" />
+    <Compile Include="IStock.cs" />
+    <Compile Include="IStockReader.cs" />
+    <Compile Include="QLExcelStockReader.cs" />
+    <Compile Include="QLStock.cs" />
+    <Compile Include="xlsReaderQL.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="YHExcelStockReader.cs" />
+    <Compile Include="YHStock.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="QLxlsFiles\000001.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="QLxlsFiles\000002.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QLxlsFiles\000004.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QLxlsFiles\000005.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QLxlsFiles\000006.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="QLxlsFiles\000007.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="QLxlsFiles\000008.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="QLxlsFiles\000009.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="QLxlsFiles\000011.xls" />
+    <None Include="QLxlsFiles\000012.xls" />
+    <None Include="QLxlsFiles\000014.xls" />
+    <None Include="QLxlsFiles\000016.xls" />
+    <None Include="QLxlsFiles\000017.xls" />
+    <None Include="QLxlsFiles\000018.xls" />
+    <None Include="QLxlsFiles\000019.xls" />
+    <None Include="QLxlsFiles\000020.xls" />
+    <None Include="QLxlsFiles\000021.xls" />
+    <None Include="QLxlsFiles\000022.xls" />
+    <None Include="QLxlsFiles\000023.xls" />
+    <None Include="QLxlsFiles\000025.xls" />
+    <None Include="QLxlsFiles\000026.xls" />
+    <None Include="QLxlsFiles\000027.xls" />
+    <None Include="QLxlsFiles\000028.xls" />
+    <None Include="QLxlsFiles\000029.xls" />
+    <None Include="QLxlsFiles\000030.xls" />
+    <None Include="QLxlsFiles\000031.xls" />
+    <None Include="QLxlsFiles\000032.xls" />
+    <None Include="QLxlsFiles\000034.xls" />
+    <None Include="QLxlsFiles\000035.xls" />
+    <None Include="QLxlsFiles\000036.xls" />
+    <None Include="QLxlsFiles\000037.xls" />
+    <None Include="QLxlsFiles\000038.xls" />
+    <None Include="QLxlsFiles\000039.xls" />
+    <None Include="QLxlsFiles\000040.xls" />
+    <None Include="QLxlsFiles\000042.xls" />
+    <None Include="QLxlsFiles\000043.xls" />
+    <None Include="QLxlsFiles\000045.xls" />
+    <None Include="QLxlsFiles\000046.xls" />
+    <None Include="QLxlsFiles\000048.xls" />
+    <None Include="QLxlsFiles\000049.xls" />
+    <None Include="QLxlsFiles\000050.xls" />
+    <None Include="QLxlsFiles\000055.xls" />
+    <None Include="QLxlsFiles\000056.xls" />
+    <None Include="QLxlsFiles\000058.xls" />
+    <None Include="QLxlsFiles\000059.xls" />
+    <None Include="QLxlsFiles\000060.xls" />
+    <None Include="QLxlsFiles\000061.xls" />
+    <None Include="QLxlsFiles\000062.xls" />
+    <None Include="QLxlsFiles\000063.xls" />
+    <None Include="QLxlsFiles\000065.xls" />
+    <None Include="QLxlsFiles\000066.xls" />
+    <None Include="QLxlsFiles\000068.xls" />
+    <None Include="QLxlsFiles\000069.xls" />
+    <None Include="QLxlsFiles\000070.xls" />
+    <None Include="QLxlsFiles\000078.xls" />
+    <None Include="QLxlsFiles\000088.xls" />
+    <None Include="QLxlsFiles\000089.xls" />
+    <None Include="QLxlsFiles\000090.xls" />
+    <None Include="QLxlsFiles\000096.xls" />
+    <None Include="QLxlsFiles\000099.xls" />
+    <None Include="QLxlsFiles\000100.xls" />
+    <None Include="QLxlsFiles\000150.xls" />
+    <None Include="QLxlsFiles\000151.xls" />
+    <None Include="QLxlsFiles\000153.xls" />
+    <None Include="QLxlsFiles\000156.xls" />
+    <None Include="QLxlsFiles\000157.xls" />
+    <None Include="QLxlsFiles\000158.xls" />
+    <None Include="QLxlsFiles\000159.xls" />
+    <None Include="QLxlsFiles\000166.xls" />
+    <None Include="QLxlsFiles\000301.xls" />
+    <None Include="QLxlsFiles\000333.xls" />
+    <None Include="QLxlsFiles\000338.xls" />
+    <None Include="QLxlsFiles\000400.xls" />
+    <None Include="QLxlsFiles\000401.xls" />
+    <None Include="QLxlsFiles\000402.xls" />
+    <None Include="QLxlsFiles\000403.xls" />
+    <None Include="QLxlsFiles\000404.xls" />
+    <None Include="QLxlsFiles\000407.xls" />
+    <None Include="QLxlsFiles\000408.xls" />
+    <None Include="QLxlsFiles\000409.xls" />
+    <None Include="QLxlsFiles\000411.xls" />
+    <None Include="QLxlsFiles\000413.xls" />
+    <None Include="QLxlsFiles\000415.xls" />
+    <None Include="QLxlsFiles\000416.xls" />
+    <None Include="QLxlsFiles\000417.xls" />
+    <None Include="QLxlsFiles\000418.xls" />
+    <None Include="QLxlsFiles\000419.xls" />
+    <None Include="QLxlsFiles\000420.xls" />
+    <None Include="QLxlsFiles\000421.xls" />
+    <None Include="QLxlsFiles\000422.xls" />
+    <None Include="QLxlsFiles\000423.xls" />
+    <None Include="QLxlsFiles\000425.xls" />
+    <None Include="QLxlsFiles\000426.xls" />
+    <None Include="QLxlsFiles\000428.xls" />
+    <None Include="QLxlsFiles\000429.xls" />
+    <None Include="QLxlsFiles\000430.xls" />
+    <None Include="QLxlsFiles\000488.xls" />
+    <None Include="QLxlsFiles\000498.xls" />
+    <None Include="QLxlsFiles\000501.xls" />
+    <None Include="QLxlsFiles\000502.xls" />
+    <None Include="QLxlsFiles\000503.xls" />
+    <None Include="QLxlsFiles\000504.xls" />
+    <None Include="QLxlsFiles\000505.xls" />
+    <None Include="QLxlsFiles\000506.xls" />
+    <None Include="QLxlsFiles\000507.xls" />
+    <None Include="QLxlsFiles\000509.xls" />
+    <None Include="QLxlsFiles\000510.xls" />
+    <None Include="QLxlsFiles\000511.xls" />
+    <None Include="QLxlsFiles\000513.xls" />
+    <None Include="QLxlsFiles\000514.xls" />
+    <None Include="QLxlsFiles\000516.xls" />
+    <None Include="QLxlsFiles\000517.xls" />
+    <None Include="QLxlsFiles\000518.xls" />
+    <None Include="QLxlsFiles\600068.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QLxlsFiles\603009.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QLxlsFiles\TLA.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QLxlsFiles\xhkj.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="YHcsvFiles\AAPL.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
