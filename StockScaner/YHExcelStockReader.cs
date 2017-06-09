@@ -38,20 +38,9 @@ namespace StockScaner
                 }
             } while (string.IsNullOrEmpty(fileName));
 
-
-
-
-
-
             YHStock stock = new YHStock();
             DataTable ds = new DataTable();
             
-                //using (TextReader fileReader=File.OpenText(fileName))
-                //{
-                //    var csv = new CsvReader(fileReader);
-                //    csv.Configuration.HasHeaderRecord = false;
-                //    csv.get
-                //}
                 using (ExcelHelper helper = new ExcelHelper(fileName))
                 {
                     ds = helper.ExcelToDataTable(file, true);
@@ -74,6 +63,11 @@ namespace StockScaner
                 double? sum360 = null;
                 for (int i = 0; i < ds.Rows.Count; i++)
                 {
+                    if (ds.Rows[i].ItemArray[5]==null||ds.Rows[i].ItemArray[5].ToString()=="null"||ds.Rows[i].ItemArray[5].ToString()=="0")
+                    {
+                        continue;
+                    }
+
                     sum += Convert.ToDouble(ds.Rows[i].ItemArray[5].ToString());
 
                     if (i >= 4)
@@ -164,14 +158,6 @@ namespace StockScaner
                             sum360 = sum360 - Convert.ToDouble(ds.Rows[i - 360].ItemArray[5].ToString()) + Convert.ToDouble(ds.Rows[i].ItemArray[5].ToString());
                         }
                     }
-
-
-
-
-
-
-
-
                     stock.WeeklyDatas.Add(new Data()
                     {
                         Date = DateTime.Parse(ds.Rows[i].ItemArray[0].ToString()),
@@ -182,10 +168,6 @@ namespace StockScaner
                         AdjClose = Convert.ToDouble(ds.Rows[i].ItemArray[5].ToString()),
                         Volume = Convert.ToDouble(ds.Rows[i].ItemArray[6].ToString()),
 
-
-
-
-
                         MA5 = sum5 / 5,
                         MA10 = sum10 / 10,
                         MA20 = sum20 / 20,
@@ -195,12 +177,8 @@ namespace StockScaner
                         MA240 = sum240 / 240,
                         MA360 = sum360 / 360
                     });
-                }
-            
-            
+                }    
             return stock;
-        }
-
-  
+        }  
     }
 }

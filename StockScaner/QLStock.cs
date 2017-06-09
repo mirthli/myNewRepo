@@ -25,6 +25,7 @@ namespace StockScaner
             {
                 var currentData=datas[i];
                 var lastData=datas[i-1];
+                var last2Data = datas[i - 2];
 
                 var short0PData = datas[i - (int)shortPeriod+1];
                 var short1PData = datas[i - (int)shortPeriod+2];
@@ -43,18 +44,31 @@ namespace StockScaner
 
                 var shortSMA=currentData.GetSMAData(shortPeriod);
                 var lastShortSMA=lastData.GetSMAData(shortPeriod);
+                var last2ShortSMA = last2Data.GetSMAData(shortPeriod);
                 var longSMA=currentData.GetSMAData(longPeriod);
                 var lastLongSMA=lastData.GetSMAData(longPeriod);
+                var last2LongSMA = last2Data.GetSMAData(longPeriod);
                 var bottomSMA = currentData.GetSMAData(bottomPeriod);
                 var lastBottomSMA = lastData.GetSMAData(bottomPeriod);
+                var last2BottomSMA = last2Data.GetSMAData(bottomPeriod);
 
                 bool isDuotou = shortSMA > lastShortSMA
                                  && longSMA > lastLongSMA
+                                 && bottomSMA > lastBottomSMA
                                  && shortSMA > bottomSMA
                                  && longSMA > bottomSMA
+                                 && shortSMA > longSMA
+
+                                 && lastShortSMA > last2ShortSMA
+                                 && lastLongSMA > last2LongSMA
+                                 && lastBottomSMA > last2BottomSMA
                                  && lastShortSMA > lastBottomSMA
                                  && lastLongSMA > lastBottomSMA
-                                 && bottomSMA > lastBottomSMA;
+                                 && lastShortSMA > lastLongSMA;
+                bool isCurrentCloseLowerThanLastClose = currentData.Close < lastData.Close;
+                bool isLastCloseLowerThanLastClose = lastData.Close < last2Data.Close;
+                bool isCurrentCloseLowerThanOpen = currentData.Close < currentData.Open;
+                bool isLastCloseLowerThanOpen = lastData.Close < lastData.Open;
 
                 bool isCloseLowerThanSMA = currentData.Close < shortSMA && currentData.Close < longSMA;
                 bool isLastCloseLowerThanSMA=lastData.Close<lastShortSMA&&lastData.Close<lastLongSMA;
@@ -62,18 +76,16 @@ namespace StockScaner
                     && isCloseLowerThanSMA 
                     && isLastCloseLowerThanSMA 
                     && currentData.isDecrease() 
-                    && lastData.isDecrease() 
-                    && currentData.Close<lastData.Close
+                    && lastData.isDecrease()
+                    && isCurrentCloseLowerThanLastClose
+                    && isLastCloseLowerThanLastClose
                     && isGreaterThanBefore
+                    && isCurrentCloseLowerThanOpen
+                    && isLastCloseLowerThanOpen
                     )
                 {
                     result.Add(datas[i]);
-                }
-
-                //var smaAttr= typeof(WeeklyData).GetCustomAttributes(typeof(SMAAttribute), true).FirstOrDefault() as SMAAttribute;
-
-                //bool isDuotou = datas[i].MA30 - datas[i - 1].MA30 > 0 &&
-                //              datas[i].MA20 - datas[i - 1].MA20 > 0;
+                }             
             }
             return result;
         }

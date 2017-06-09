@@ -46,7 +46,13 @@ namespace StockScaner
                     {
                         i++;
                     }
-                    var end=stock.WeeklyDatas[index + 2 * i + j+1];
+                    Data end = new Data();
+                    if (index + 2 * i + j+1<=stock.WeeklyDatas.Count)
+                    {
+                        end = stock.WeeklyDatas[index + 2 * i + j + 1];
+                    }
+
+                 
                     ar.EndDate = end.Date;
                     ar.EndPrice = end.AdjClose==0?end.Close:end.AdjClose;
                     ar.Profit =Math.Round( ar.EndPrice / ar.StartPrice,4);
